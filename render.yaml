@@ -1,0 +1,46 @@
+# render.yaml
+# Deploy the WhatsApp MCP backend on Render
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: whatsapp-mcp-backend
+    runtime: node
+    region: oregon          # change to your preferred region
+    plan: starter           # upgrade to standard for production
+    rootDir: app/backend
+
+    buildCommand: npm install && npm run build
+    startCommand: node dist/remote.js
+
+    # Health check — Render will restart if this fails
+    healthCheckPath: /health
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: PORT
+        value: 3000
+
+      # Set these in the Render dashboard (not here — keep secrets out of git)
+      - key: MONGODB_URI
+        sync: false         # fill in Render dashboard
+
+      - key: API_KEY
+        sync: false         # fill in Render dashboard
+
+      - key: WA_SESSION_NAME
+        value: whatsapp-mcp-session
+
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+
+      - key: RATE_LIMIT_MAX
+        value: "100"
+
+    # Persist /tmp across deploys (WhatsApp Puppeteer temp files)
+    disk:
+      name: wwebjs-tmp
+      mountPath: /tmp
+      sizeGB: 1

@@ -1,0 +1,16 @@
+{
+  "_comment": "Add this block inside the 'mcpServers' section of your Claude Desktop config.",
+  "_config_location_windows": "%APPDATA%\\Claude\\claude_desktop_config.json",
+  "_config_location_mac":     "~/Library/Application Support/Claude/claude_desktop_config.json",
+
+  "mcpServers": {
+    "whatsapp": {
+      "command": "node",
+      "args": ["H:\\project\\my project\\whatsapp-mcp\\dist\\index.js"],
+      "env": {
+        "BACKEND_URL": "https://your-backend.onrender.com",
+        "API_KEY":     "your_super_secret_api_key_here_change_this"
+      }
+    }
+  }
+}
