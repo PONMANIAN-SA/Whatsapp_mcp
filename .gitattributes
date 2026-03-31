@@ -1,0 +1,9 @@
+# Tell GitHub Linguist to ignore these paths for language stats
+
+dist/** linguist-generated=true
+*.bat linguist-detectable=false
+*.sh linguist-detectable=false
+*.yaml linguist-detectable=false
+*.json linguist-detectable=false
+
+src/*.ts linguist-language=TypeScript
