@@ -8,7 +8,6 @@ services:
     runtime: node
     region: oregon          # change to your preferred region
     plan: starter           # upgrade to standard for production
-    rootDir: app/backend
 
     buildCommand: npm install && npm run build
     startCommand: node dist/remote.js
@@ -42,5 +41,5 @@ services:
     # Persist /tmp across deploys (WhatsApp Puppeteer temp files)
     disk:
       name: wwebjs-tmp
-      mountPath: /tmp
+      mountPath: /opt/render/project/.wwebjs_auth
       sizeGB: 1
